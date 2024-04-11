@@ -1,0 +1,13 @@
+{
+    "name": "servidor-con-express",
+    "version": "1.0.0",
+    "description": "Esta app es para consultar y almacenar los productos en el servidor",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "^4.19.2",
+        "fs": "^0.0.1-security"
+    }
+}
