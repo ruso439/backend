@@ -1,7 +1,7 @@
 import express from 'express';
-import  productsRouter  from './routes/products.router.js';
-import  cartRouter  from './routes/cart.router.js';
-import  viewsRouter  from './routes/view.router.js';
+import productsRouter from './routes/products.router.js';
+import cartRouter from './routes/cart.router.js';
+import viewsRouter from './routes/view.router.js';
 import { __dirname, uploader } from './utils.js';
 import expressHandlebars from 'express-handlebars';
 import { Server } from 'socket.io';
@@ -19,35 +19,31 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
-app.engine('hbs', handlebars.engine({
+// Aquí es donde necesitas hacer el cambio
+app.engine('hbs', expressHandlebars.engine({
     extname: '.hbs'
 }));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 
-
-
 app.use('/upload-file', uploader.single('myFile'), (req, res) => {
     if(!req.file) {
-        return res.send('No se pudo subir el archivo')
+        return res.send('No se pudo subir el archivo');
     };
-    res.status(200).send ('Archivo subido con éxito')
+    res.status(200).send('Archivo subido con éxito');
 });
 
 app.use('/', viewsRouter);
-
 app.use('/api/products', productsRouter);
-
 app.use('/api/cart', cartRouter);
 
-let messages = []
+let messages = [];
 io.on('connection', socket => {
     console.log('Cliente conectado');
 
     socket.on('message', data => {
-        messages.push(data)
-        io.emit('messageLogs', messages )
-    })
-
+        messages.push(data);
+        io.emit('messageLogs', messages);
+    });
 });
