@@ -7,9 +7,9 @@ cartRouter.use(json());
 const carts = new cartManager;
 
 cartRouter.get("/", async (req, res) => {
-  
-  const cart = await carts.getCart();
-  res.send(cart);
+
+const cart = await carts.getCart();
+res.send(cart);
 });
 
 cartRouter.get("/:cid", async (req, res)=>{
@@ -19,19 +19,19 @@ cartRouter.get("/:cid", async (req, res)=>{
         const cart = await carts.getIdCart(idc);
         res.send(cart);
     } catch (error) {
-         res.status(404).send({ error: `${error}` });
+        res.status(404).send({ error: `${error}` });
     }
     
 });
 
 cartRouter.post("/", async (req,res)=>{
-    // agregar productos a un carro completamente nuevo
+
     try {
         const { prod } = req.body;
         const newCart = await carts.addCart();
         res.send(newCart);
     } catch (error) {
-         res.status(404).send({ error: `${error}` });
+        res.status(404).send({ error: `${error}` });
     }
     
 
