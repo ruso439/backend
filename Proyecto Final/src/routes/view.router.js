@@ -4,28 +4,26 @@ import ProductManager from "../ProductManager.js";
 const router = Router();
 
 let productManager = new ProductManager();
-const products = await productManager.getProducts()
 
 router.get('/', async (req, res) => {
-    const products = await productManager.getProducts()
-let cantProducts = products.length
+    const products = await productManager.getProducts();
+    let cantProducts = products.length;
     res.render('home', {
         products,
         cantProducts,
-    })
+    });
 }); 
 
-router.get('/realtimeproducts', (req, res) => {
+router.get('/realtimeproducts', async (req, res) => {
+    const products = await productManager.getProducts();
     res.render('realtimeproducts', {
         products,
+    });
+});
 
-    }  )})
+router.get('/chat', (req, res) => {
+    // const {socketServer} = req;
+    res.render('chat', {});
+});
 
-    router.get('/chat', (req, res) => {
-        // const {socketServer} = req;
-        res.render('chat', {
-
-        })
-    })
-
-export default router; 
+export default router;

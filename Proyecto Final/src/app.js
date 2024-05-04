@@ -6,6 +6,7 @@ import { __dirname, uploader } from './utils.js';
 import expressHandlebars from 'express-handlebars';
 import { Server } from 'socket.io';
 
+
 const app = express();
 
 const httpServer = app.listen(8080, err => {
@@ -19,10 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
-// Aquí es donde necesitas hacer el cambio
-app.engine('hbs', expressHandlebars.engine({
-    extname: '.hbs'
-}));
+app.engine('hbs', expressHandlebars({ extname: '.hbs' }));
+
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
