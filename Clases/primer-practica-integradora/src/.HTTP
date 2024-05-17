@@ -1,0 +1,9 @@
+# Users
+GET https://localhost:8080/api/users
+
+###
+POST https://localhost:8080/api/users
+###
+GET https://localhost:8080/api/users/ruso439
+###
+PUT https://localhost:8080/api/users/ruso439
